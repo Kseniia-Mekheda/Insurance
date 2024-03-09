@@ -32,15 +32,13 @@ istream& operator>>(istream& in, Insurance& I) {
 	return in;
 }
 
-Insurance** createArr(const std::string& filename, size_t& n, size_t& count)
-{
+Insurance** createArr(const std::string& filename, size_t& n, size_t& count){
 	ifstream fin(filename);
 	fin >> n;
 	Insurance** arr = new Insurance * [n];
 	count = 0; // на випадок, якщо в файлі будуть не лише потрібні нам значення
 
-	for (size_t i = 0; i < n; ++i)
-	{
+	for (size_t i = 0; i < n; ++i){
 		char type;
 		fin >> type;
 		if (type == CarInsurance::CAR_INSURANCE_TYPE) {
@@ -53,8 +51,7 @@ Insurance** createArr(const std::string& filename, size_t& n, size_t& count)
 			fin >> *arr[count];
 			++count;
 		}
-		else
-		{
+		else{
 			string line;
 			getline(fin, line);
 		}

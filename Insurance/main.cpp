@@ -10,7 +10,7 @@ using namespace std;
 
 int main() {
 	size_t size; 
-	size_t count; // на випадок, якщо деякі дані будуть мати некоректну помітку 
+	size_t count; 
 	Insurance** insurances = createArr("insurances.txt", size, count);
 	printInsurances(insurances, count);
 
