@@ -9,32 +9,9 @@
 using namespace std;
 
 int main() {
-	ifstream fin("insurances.txt");
-	size_t size;
-	fin >> size;
-	Insurance** insurances = new Insurance * [size];
-	int count = 0; // на випадок, якщо в файлі будуть не лише потрібні нам значення
-
-	for (size_t i = 0; i < size; ++i) {
-		char type;
-		fin >> type;
-		if (type == CarInsurance::CAR_INSURANCE_TYPE) {
-			insurances[count] = new CarInsurance();
-			fin >> *insurances[count];
-			++count;
-		}
-		else if (type == FamilyInsurance::FAMILY_INSURANCE_TYPE) {
-			insurances[count] = new FamilyInsurance();
-			fin >> *insurances[count];
-			++count;
-		}
-		else {
-			string line;
-			getline(fin, line);
-		}
-	}
-
-	fin.close();
+	size_t size; 
+	size_t count; // на випадок, якщо деякі дані будуть мати некоректну помітку 
+	Insurance** insurances = createArr("insurances.txt", size, count);
 	printInsurances(insurances, count);
 
 	cout << "The sum of the prices of all insurances is: " << findSumPrice(insurances, count) << endl;

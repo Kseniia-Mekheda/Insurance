@@ -19,6 +19,7 @@ public:
 };
 
 std::istream& operator>>(std::istream& in, Insurance& I); 
+Insurance** createArr(const std::string& fileName, size_t& size, size_t& capacity);
 void printInsurances(Insurance** arr, size_t size);
 double findSumPrice(Insurance** arr, size_t size);
 void findCheapest(Insurance** arr, size_t size);

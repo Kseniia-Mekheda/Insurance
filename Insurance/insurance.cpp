@@ -1,4 +1,7 @@
 #include "insurance.h"
+#include "carInsurance.h"
+#include "familyInsurance.h"
+#include <string>
 #include <fstream>
 using namespace std;
 
@@ -27,6 +30,36 @@ bool Insurance::operator<(const Insurance& I) {
 istream& operator>>(istream& in, Insurance& I) {
 	I.readFrom(in);
 	return in;
+}
+
+Insurance** createArr(const std::string& filename, size_t& n, size_t& count)
+{
+	ifstream fin(filename);
+	fin >> n;
+	Insurance** arr = new Insurance * [n];
+	count = 0; // на випадок, якщо в файлі будуть не лише потрібні нам значення
+
+	for (size_t i = 0; i < n; ++i)
+	{
+		char type;
+		fin >> type;
+		if (type == CarInsurance::CAR_INSURANCE_TYPE) {
+			arr[count] = new CarInsurance();
+			fin >> *arr[count];
+			++count;
+		}
+		else if (type == FamilyInsurance::FAMILY_INSURANCE_TYPE) {
+			arr[count] = new FamilyInsurance();
+			fin >> *arr[count];
+			++count;
+		}
+		else
+		{
+			string line;
+			getline(fin, line);
+		}
+	}
+	return arr;
 }
 
 void printInsurances(Insurance** arr, size_t size) {
