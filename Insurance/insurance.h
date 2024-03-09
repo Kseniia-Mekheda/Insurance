@@ -16,6 +16,7 @@ public:
 	virtual double fullPrice() const abstract;
 
 	bool operator<(const Insurance& I); 
+	bool operator>(const Insurance& I);
 };
 
 std::istream& operator>>(std::istream& in, Insurance& I); 

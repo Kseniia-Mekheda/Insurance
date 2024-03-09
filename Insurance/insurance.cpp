@@ -27,6 +27,10 @@ bool Insurance::operator<(const Insurance& I) {
 	return this->fullPrice() < I.fullPrice();
 }
 
+bool Insurance::operator>(const Insurance& I) {
+	return this->fullPrice() > I.fullPrice();
+}
+
 istream& operator>>(istream& in, Insurance& I) {
 	I.readFrom(in);
 	return in;
@@ -77,7 +81,7 @@ double findSumPrice(Insurance** arr, size_t size) {
 void findCheapest(Insurance** arr, size_t size) {
 	size_t cheapestIndex = 0;
 	for (size_t i = 1; i < size; ++i) {
-		if (arr[i] < arr[cheapestIndex]) {
+		if (*arr[i] < *arr[cheapestIndex]) {
 			cheapestIndex = i;
 		}
 	}
@@ -88,7 +92,7 @@ void findCheapest(Insurance** arr, size_t size) {
 void findMostExpencive(Insurance** arr, size_t size) {
 	size_t mostExpenciveIndex = 0;
 	for (size_t i = 1; i < size; ++i) {
-		if (arr[i] > arr[mostExpenciveIndex]) {
+		if (*arr[i] > *arr[mostExpenciveIndex]) {
 			mostExpenciveIndex = i;
 		}
 	}
